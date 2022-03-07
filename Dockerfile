@@ -5,6 +5,10 @@ RUN apk update \
     && apk add rsync
 
 WORKDIR /data1
+
+RUN echo "simulation:123456" > /etc/rsync.password \
+    && chmod 600 /etc/rsync.password
+
 COPY rsyncd.conf /etc/
 
 CMD ["rsync", "--daemon", "--no-detach"]
